@@ -89,12 +89,6 @@ return {
           end,
           desc = "LSP Go to definition",
         },
-        ["gr"] = {
-          function()
-            vim.lsp.buf.references()
-          end,
-          desc = "LSP References",
-        },
         ["gi"] = {
           function()
             vim.lsp.buf.implementation()
@@ -113,6 +107,19 @@ return {
           end,
           desc = "LSP Signature help",
         },
+        ["<leader>ff"] = {
+      function()
+        require("telescope.builtin").find_files()
+      end,
+      desc = "Telescope Find Files",
+    },
+     ["gr"] = {
+      function()
+        require("telescope.builtin").lsp_references()
+      end,
+      desc = "Telescope LSP References",
+    },
+
 
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus

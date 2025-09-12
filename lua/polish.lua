@@ -54,5 +54,5 @@ vim.api.nvim_create_user_command("ToLF", function()
   vim.cmd("write")
 end, {})
 
-vim.cmd.colorscheme("astrolight")
+vim.cmd.colorscheme("habamax")
 vim.opt.guifont = "FiraCode Nerd Font:h13"
