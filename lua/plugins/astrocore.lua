@@ -76,7 +76,43 @@ return {
             vim.lsp.buf.code_action()
           end,
           desc = "LSP Code actions"
-        }
+        },
+        ["<f2>"] = {
+          function()
+            vim.lsp.buf.rename()
+          end,
+          desc = "LSP Rename",
+        },
+        ["gd"] = {
+          function()
+            vim.lsp.buf.definition()
+          end,
+          desc = "LSP Go to definition",
+        },
+        ["gr"] = {
+          function()
+            vim.lsp.buf.references()
+          end,
+          desc = "LSP References",
+        },
+        ["gi"] = {
+          function()
+            vim.lsp.buf.implementation()
+          end,
+          desc = "LSP Go to implementation",
+        },
+        ["K"] = {
+          function()
+            vim.lsp.buf.hover()
+          end,
+          desc = "LSP Hover",
+        },
+        ["<f1>"] = {
+          function()
+            vim.lsp.buf.signature_help()
+          end,
+          desc = "LSP Signature help",
+        },
 
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus

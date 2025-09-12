@@ -34,3 +34,25 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format({ async = false })
   end,
 })
+
+-- Enforce LF line endings in Neovim
+vim.opt.fileformat = "unix"
+vim.opt.fileformats = { "unix", "dos" } -- read DOS if present, write as UNIX
+
+-- Force LF on every save for all buffers
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function(ev)
+    vim.bo[ev.buf].fileformat = "unix"
+  end,
+})
+
+-- Optional: command to convert current buffer to LF and strip stray CRs, then write
+vim.api.nvim_create_user_command("ToLF", function()
+  vim.cmd([[%s/\r$//e]])
+  vim.bo.fileformat = "unix"
+  vim.cmd("write")
+end, {})
+
+vim.cmd.colorscheme("astrolight")
+vim.opt.guifont = "FiraCode Nerd Font:h13"
