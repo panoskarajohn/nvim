@@ -13,12 +13,14 @@ return {
       ensure_installed = {
         -- install language servers
         "lua-language-server",
+        "omnisharp",
+        "clangd",
 
         -- install formatters
         "stylua",
 
         -- install debuggers
-        "debugpy",
+        --"debugpy",
 
         -- install any other package
         "tree-sitter-cli",

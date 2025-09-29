@@ -12,6 +12,7 @@ require('lspconfig').omnisharp.setup({
     "omnisharp",
     "--languageserver",
     "--hostPID", tostring(vim.fn.getpid()),
+    "--RoslynExtensionsOptions:enableAnalyzersSupport=true",
     "FormattingOptions:EnableEditorConfigSupport=true",
     "CodeLensOptions:Enabled=true"
   },
@@ -54,5 +55,5 @@ vim.api.nvim_create_user_command("ToLF", function()
   vim.cmd("write")
 end, {})
 
-vim.cmd.colorscheme("habamax")
+vim.cmd.colorscheme("cyberdream")
 vim.opt.guifont = "FiraCode Nerd Font:h13"
