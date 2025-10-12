@@ -55,5 +55,5 @@ vim.api.nvim_create_user_command("ToLF", function()
   vim.cmd("write")
 end, {})
 
-vim.cmd.colorscheme("cyberdream")
+vim.cmd.colorscheme("catppuccin-frappe")
 vim.opt.guifont = "FiraCode Nerd Font:h13"
