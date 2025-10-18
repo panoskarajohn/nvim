@@ -29,6 +29,32 @@ require('lspconfig').omnisharp.setup({
   -- ... other config options ...
 })
 
+require('lspconfig').clangd.setup({
+  cmd = {
+    "clangd",
+    "--background-index",                 -- keep a background index of the project
+    "--clang-tidy",                       -- run clang-tidy diagnostics
+    "--completion-style=detailed",        -- richer completion items
+    "--header-insertion=never",           -- don't auto-insert #include lines
+    "--fallback-style=LLVM"               -- formatting fallback style
+  },
+  on_attach = function(client, bufnr)
+    -- refresh CodeLens like in your omnisharp config
+    if client.server_capabilities.codeLensProvider then
+      vim.api.nvim_create_autocmd({"BufEnter", "InsertLeave"}, {
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.codelens.refresh()
+        end
+      })
+    end
+  end,
+  -- add completion capabilities if you use nvim-cmp
+  -- root detection: prefer compile_commands.json or .git
+  root_dir = require('lspconfig.util').root_pattern('compile_commands.json', 'compile_flags.txt', '.git'),
+  -- other clangd-specific options can go here (e.g., handlers, init_options)
+})
+
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.cs",
   callback = function()
@@ -54,6 +80,30 @@ vim.api.nvim_create_user_command("ToLF", function()
   vim.bo.fileformat = "unix"
   vim.cmd("write")
 end, {})
+
+vim.api.nvim_set_keymap('n', '<leader>o', [[:lua ToggleHeaderSource()<CR>]], { noremap = true, silent = true })
+
+function ToggleHeaderSource()
+  local file = vim.fn.expand('%:t')
+  local base = vim.fn.expand('%:r')
+
+  if file:match('%.h$') then
+    if vim.fn.filereadable(base .. '.c') == 1 then
+      vim.cmd('edit ' .. base .. '.c')
+    elseif vim.fn.filereadable(base .. '.cpp') == 1 then
+      vim.cmd('edit ' .. base .. '.cpp')
+    else
+      vim.notify('No source file found')
+    end
+  else
+    if vim.fn.filereadable(base .. '.h') == 1 then
+      vim.cmd('edit ' .. base .. '.h')
+    else
+      vim.notify('No header file found')
+    end
+  end
+end
+
 
 vim.cmd.colorscheme("catppuccin-frappe")
 vim.opt.guifont = "FiraCode Nerd Font:h13"
