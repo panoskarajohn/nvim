@@ -56,7 +56,7 @@ require('lspconfig').clangd.setup({
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.cs",
+  pattern = {"*.cs", "*.c", "*.cpp", "*.h", "*.cc", "*.cxx", "*.hpp", "*.hh", "*.hxx", "*.js", "*.ts", "*.jsx", "*.tsx", "*.lua", "*.py", "*.go", "*.rs"},
   callback = function()
     vim.lsp.buf.format({ async = false })
   end,
