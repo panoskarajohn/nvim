@@ -81,29 +81,12 @@ vim.api.nvim_create_user_command("ToLF", function()
   vim.cmd("write")
 end, {})
 
-vim.api.nvim_set_keymap('n', '<leader>o', [[:lua ToggleHeaderSource()<CR>]], { noremap = true, silent = true })
-
-function ToggleHeaderSource()
-  local file = vim.fn.expand('%:t')
-  local base = vim.fn.expand('%:r')
-
-  if file:match('%.h$') then
-    if vim.fn.filereadable(base .. '.c') == 1 then
-      vim.cmd('edit ' .. base .. '.c')
-    elseif vim.fn.filereadable(base .. '.cpp') == 1 then
-      vim.cmd('edit ' .. base .. '.cpp')
-    else
-      vim.notify('No source file found')
-    end
-  else
-    if vim.fn.filereadable(base .. '.h') == 1 then
-      vim.cmd('edit ' .. base .. '.h')
-    else
-      vim.notify('No header file found')
-    end
-  end
-end
-
+vim.keymap.set(
+  'n',
+  '<leader>o',
+  '<cmd>ClangdSwitchSourceHeader<CR>',
+  { silent = true }
+)
 
 vim.cmd.colorscheme("catppuccin-frappe")
 vim.opt.guifont = "FiraCode Nerd Font:h13"
