@@ -14,8 +14,6 @@ return {
     opts = function(_, opts)
       local dap = require "dap"
 
-      require("dap.ext.vscode").load_launchjs(nil, { lldb = { "c", "cpp" } })
-
       vim.keymap.set("n", "<leader>dt", function()
         dap.continue()
       end, { desc = "Debug from launch.json" })

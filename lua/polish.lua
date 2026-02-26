@@ -88,5 +88,5 @@ vim.keymap.set(
   { silent = true }
 )
 
-vim.cmd.colorscheme("catppuccin-frappe")
-vim.opt.guifont = "FiraCode Nerd Font:h13"
+vim.cmd.colorscheme("catppuccin-mocha")
+vim.opt.guifont = "JetBrainsMono Nerd Font:h12"

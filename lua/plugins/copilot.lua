@@ -1,6 +1,7 @@
 return {
   {
     "zbirenbaum/copilot.lua",
+    enabled = false,
     event = "InsertEnter",
     config = function()
       require("copilot").setup({
@@ -20,7 +21,7 @@ return {
           lua = true,
           cpp = true,
           csharp = true,
-          cs = true,
+          cs = false,
           ["*"] = false,
         },
       })
@@ -28,6 +29,7 @@ return {
   },
   {
     "zbirenbaum/copilot-cmp",
+    enabled = false,
     dependencies = { "zbirenbaum/copilot.lua" },
     config = function()
       require("copilot_cmp").setup()
