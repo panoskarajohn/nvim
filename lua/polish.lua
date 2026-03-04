@@ -91,5 +91,5 @@ vim.keymap.set(
 -- Use Ctrl+Q for blockwise visual mode to avoid Ctrl+V paste conflicts
 vim.keymap.set({ 'n', 'x' }, '<C-q>', '<C-v>', { noremap = true, silent = true, desc = 'Blockwise Visual Mode' })
 
-vim.cmd.colorscheme("cyberdream")
+vim.cmd.colorscheme("blue")
 vim.opt.guifont = "JetBrainsMono Nerd Font:h12"
